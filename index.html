@@ -17,6 +17,10 @@
 	var ctx = canvas.getContext("2d");	
 	x = 25;
 	y = 25;
+	right = false;
+	left = false;
+	up = false;
+	down = false;
 	function drawBall(){
 		ctx.beginPath();
     		ctx.arc(x, y, 10, 0, Math.PI*2);
@@ -27,20 +31,32 @@
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawBall();
+		if(up==true){
+			y-=3;
+		}
+		if(down==true){
+			y+=3;
+		}
+		if(right == true){
+			x+=3;
+		}
+		if(left == true){
+			x-=3;
+		}
 	}
 	document.addEventListener("keydown", keyDownHandler, false);
 	function keyDownHandler(e){
 		if(e.keyCode == 40){
-			y += 1;
+			down = true;
 		}
 		else if(e.keyCode == 38){
-			y -= 1;
+			up = true;
 		}
 		if(e.keyCode == 37){
-			x -=1;
+			left = true;
 		}
 		else if(e.keyCode == 39){
-			x +=1;
+			right = true;
 		}
 	}
 	setInterval(draw, 2);
