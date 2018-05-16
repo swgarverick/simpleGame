@@ -45,6 +45,7 @@
 		}
 	}
 	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
 	function keyDownHandler(e){
 		if(e.keyCode == 40){
 			down = true;
@@ -57,6 +58,20 @@
 		}
 		else if(e.keyCode == 39){
 			right = true;
+		}
+	}
+	function keyUpHandler(e){
+		if(e.keyCode == 40){
+			down = false;
+		}
+		else if(e.keyCode == 38){
+			up = false;
+		}
+		if(e.keyCode == 37){
+			left = false;
+		}
+		else if(e.keyCode == 39){
+			right = false;
 		}
 	}
 	setInterval(draw, 2);
