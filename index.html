@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-<canvas id="myCanvas" width="480" height="320" style="border: 10px solid black;" ></canvas>
+<canvas id="myCanvas" width="484" height="337.7" style="border: 10px solid black;" ></canvas>
 <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
@@ -18,8 +18,10 @@
 	xPositions = new Array;
 	yPositions = new Array;
 	var score = 0;	
-	x = 25;
-	y = 25;
+	var x = 33;
+	var y = 33;
+	var xprev;
+	var yprev;
 	rectX = 150;
 	rectY = 150;
 	right = false;
@@ -41,13 +43,13 @@
 		}
 	}
 	function drawTrailer(i){
-		if(i = 1){
-			xPositions[0] = x;
-			yPositions[0] = y;
+		if(i == 1){
+			xPositions[0] = xprev;
+			yPositions[0] = yprev;
 		}
 		else{
-			xPositions[i-1] = xPositions[i];
-			yPositions[i-1] = yPositions[i];
+			xPositions[i-1] = xPositions[i-2];
+			yPositions[i-1] = yPositions[i-2];
 		}
 		ctx.beginPath();
     		ctx.arc(xPositions[i-1], yPositions[i-1], 10, 0, Math.PI*2);
@@ -65,16 +67,24 @@
 	}
 	function moveBall(){
 		if(up==true){
-			y-=22;
+			yprev = y;
+			xprev = x;
+			y-=20.9;
 		}
 		if(down==true){
-			y+=22;
+			xprev = x;
+			yprev = y;
+			y+=20.9;
 		}
 		if(right == true){
-			x+=22;
+			xprev = x;
+			yprev = y;
+			x+=20.9;
 		}
 		if(left == true){
-			x-=22;
+			xprev = x;
+			yprev = y;
+			x-=20.9;
 		}
 	}
 	function checkForPoint(){
@@ -86,9 +96,9 @@
 	}
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		drawTail();
 		drawBall();
 		drawSquare();
-		drawTail();
 	}
 	document.addEventListener("keydown", keyDownHandler, false);
 	function keyDownHandler(e){
@@ -117,7 +127,7 @@
 			down = false;
 		}
 	}
-	setInterval(draw, 500);
+	setInterval(draw, 150);
 </script>
 
 </body>
