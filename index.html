@@ -5,18 +5,23 @@
     <title>Simple Game</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	canvas { background: #abc; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
-
-<canvas id="myCanvas" width="480" height="320"></canvas>
-
+<canvas id="myCanvas" width="480" height="320" style="border: 10px solid black;" ></canvas>
 <script>
 	var canvas = document.getElementById("myCanvas");
-	var ctx = canvas.getContext("2d");	
+	var ctx = canvas.getContext("2d");
+	var xPositions = [];
+	var yPositions = [];
+	xPositions = new Array;
+	yPositions = new Array;
+	var score = 0;	
 	x = 25;
 	y = 25;
+	rectX = 150;
+	rectY = 150;
 	right = false;
 	left = false;
 	up = false;
@@ -27,54 +32,92 @@
     		ctx.fillStyle = "#0095DD";
     		ctx.fill();
     		ctx.closePath();
+		moveBall();
+	}
+	function drawTail(){
+		var i;
+		for(i = score; i>0; i--){
+			drawTrailer(i);
+		}
+	}
+	function drawTrailer(i){
+		if(i = 1){
+			xPositions[0] = x;
+			yPositions[0] = y;
+		}
+		else{
+			xPositions[i-1] = xPositions[i];
+			yPositions[i-1] = yPositions[i];
+		}
+		ctx.beginPath();
+    		ctx.arc(xPositions[i-1], yPositions[i-1], 10, 0, Math.PI*2);
+    		ctx.fillStyle = "#0095DD";
+    		ctx.fill();
+    		ctx.closePath();
+	}
+	function drawSquare(){
+		ctx.beginPath();
+		ctx.rect(rectX,rectY,10,10);
+		ctx.fillStyle = "#FFD700";
+		ctx.fill();
+		ctx.closePath();
+		checkForPoint();
+	}
+	function moveBall(){
+		if(up==true){
+			y-=22;
+		}
+		if(down==true){
+			y+=22;
+		}
+		if(right == true){
+			x+=22;
+		}
+		if(left == true){
+			x-=22;
+		}
+	}
+	function checkForPoint(){
+		if(((x>rectX&&(x-19)<rectX)||(x<rectX&&(x+11)>rectX))&&((y>rectY&&(y-19)<rectY)||(y<rectY&&(y+11)>rectY))){
+			rectX = (Math.random()*460)+10;
+			rectY = (Math.random()*300)+10;
+			score+=1;	
+		}
 	}
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawBall();
-		if(up==true){
-			y-=3;
-		}
-		if(down==true){
-			y+=3;
-		}
-		if(right == true){
-			x+=3;
-		}
-		if(left == true){
-			x-=3;
-		}
+		drawSquare();
+		drawTail();
 	}
 	document.addEventListener("keydown", keyDownHandler, false);
-	document.addEventListener("keyup", keyUpHandler, false);
 	function keyDownHandler(e){
 		if(e.keyCode == 40){
 			down = true;
+			up = false;
+			left = false;
+			right = false;
 		}
 		else if(e.keyCode == 38){
 			up = true;
+			down = false;
+			left = false;
+			right = false;
 		}
 		if(e.keyCode == 37){
 			left = true;
+			right = false;
+			up = false;
+			down = false;
 		}
 		else if(e.keyCode == 39){
 			right = true;
-		}
-	}
-	function keyUpHandler(e){
-		if(e.keyCode == 40){
+			left = false;
+			up = false;
 			down = false;
 		}
-		else if(e.keyCode == 38){
-			up = false;
-		}
-		if(e.keyCode == 37){
-			left = false;
-		}
-		else if(e.keyCode == 39){
-			right = false;
-		}
 	}
-	setInterval(draw, 2);
+	setInterval(draw, 500);
 </script>
 
 </body>
