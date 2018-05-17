@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-<canvas id="myCanvas" width="484" height="337.7" style="border: 10px solid black;" ></canvas>
+<canvas id="myCanvas" width="484" height="344" style="border: 10px solid black;" ></canvas>
 <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
@@ -18,12 +18,12 @@
 	xPositions = new Array;
 	yPositions = new Array;
 	var score = 0;	
-	var x = 33;
-	var y = 33;
+	var x = 12;
+	var y = 12;
 	var xprev;
 	var yprev;
-	rectX = 150;
-	rectY = 150;
+	rectX = 20*(Math.round(Math.random()*23))+7;
+	rectY = 20*(Math.round(Math.random()*16))+7;
 	right = false;
 	left = false;
 	up = false;
@@ -69,28 +69,29 @@
 		if(up==true){
 			yprev = y;
 			xprev = x;
-			y-=20.9;
+			y-=20;
 		}
 		if(down==true){
 			xprev = x;
 			yprev = y;
-			y+=20.9;
+			y+=20;
 		}
 		if(right == true){
 			xprev = x;
 			yprev = y;
-			x+=20.9;
+			x+=20;
 		}
 		if(left == true){
 			xprev = x;
 			yprev = y;
-			x-=20.9;
+			x-=20;
 		}
 	}
 	function checkForPoint(){
-		if(((x>rectX&&(x-19)<rectX)||(x<rectX&&(x+11)>rectX))&&((y>rectY&&(y-19)<rectY)||(y<rectY&&(y+11)>rectY))){
-			rectX = (Math.random()*460)+10;
-			rectY = (Math.random()*300)+10;
+		//Check if the center of the square and the center of the circle are within sqrt(50) pts
+		if((Math.sqrt(Math.pow(((rectX+5)-x),2)+Math.pow(((rectY+5)-y),2)))<(Math.sqrt(50)+10)){
+			rectX = 20*(Math.round(Math.random()*23))+7;
+			rectY = 20*(Math.round(Math.random()*16))+7;
 			score+=1;	
 		}
 	}
