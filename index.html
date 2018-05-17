@@ -12,9 +12,9 @@
     </style>
 </head>
 <body>
-<p id="dScore" style="color:black; font-size:75px;"></p>
+<h1 id="GT" style="text-align:center; font-size:75px;">SNAKE</h1>
 <canvas id="myCanvas" width="484" height="344" style="border: 10px solid black;" ></canvas>
-//<p id="">Text</p>
+<p id="words">Text</p>
 <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
@@ -119,7 +119,6 @@
 			drawBall();
 			drawSquare();
 			checkLife();
-			document.getElementById("dScore").innerHTML = score;
 		}
 		else{
 			ctx.beginPath();
@@ -128,6 +127,19 @@
 			ctx.fillText("GAME OVER",88,180);
 			ctx.closePath();
 		}
+		displayScore();
+	}
+	function displayScore(){
+		ctx.beginPath();
+		ctx.font = "40px Arial";
+		ctx.fillStyle = "#000000";
+		if(score<10){
+			ctx.fillText(score,450,40);
+		}
+		else{
+			ctx.fillText(score,430,40);
+		}
+		closePath();
 	}
 	document.addEventListener("keydown", keyDownHandler, false);
 	function keyDownHandler(e){
