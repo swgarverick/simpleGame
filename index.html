@@ -14,6 +14,8 @@
 <body>
 <h1 id="GT" style="text-align:center; font-size:75px;">SNAKE</h1>
 <canvas id="myCanvas" width="484" height="344" style="border: 10px solid black;" ></canvas>
+<button onclick="reStart()">Play Again</button>
+<button onclick="location.href='http://swgarverick.github.io';">Home</button>
 <p id="words">Text</p>
 <script>
 	var canvas = document.getElementById("myCanvas");
@@ -28,12 +30,26 @@
 	var y = 12;
 	var xprev;
 	var yprev;
-	rectX = 20*(Math.round(Math.random()*23))+7;
-	rectY = 20*(Math.round(Math.random()*16))+7;
+	var rectX = 20*(Math.round(Math.random()*23))+7;
+	var rectY = 20*(Math.round(Math.random()*16))+7;
 	right = false;
 	left = false;
 	up = false;
 	down = false;
+	function reStart(){
+		right = false;
+		left = false;
+		up = false;
+		down = false;
+		xPositions = new Array;
+		yPositions = new Array;
+		gameOver = false;
+		x = 12;
+		y = 12;
+		score = 0;
+		rectX = 20*(Math.round(Math.random()*23))+7;
+		rectY = 20*(Math.round(Math.random()*16))+7;
+	}
 	function drawBall(){
 		ctx.beginPath();
     		ctx.arc(x, y, 10, 0, Math.PI*2);
