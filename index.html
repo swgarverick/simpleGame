@@ -14,9 +14,10 @@
 <body>
 <h1 id="GT" style="text-align:center; font-size:75px;">SNAKE</h1>
 <canvas id="myCanvas" width="484" height="344" style="border: 10px solid black;" ></canvas>
-<button onclick="reStart()">Play Again</button>
-<button onclick="location.href='http://swgarverick.github.io';">Home</button>
-<p id="words">Text</p>
+<div id="container" style = "text-align:center; padding:25px;">
+<button onclick="reStart()" style = "background:#abc;width:100px;height:50px;">Play Again</button>
+<button onclick="location.href='http://swgarverick.github.io';" style = "background:#abc;width:100px; height:50px;">Home</button>
+</div>
 <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
