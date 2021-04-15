@@ -1,4 +1,4 @@
 # Snake
 
-## Simple game to display on git pages
+## https://swgarverick.github.io/
 
